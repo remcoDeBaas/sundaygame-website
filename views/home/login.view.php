@@ -1,6 +1,7 @@
 <?php
 
 require_once '../../includes/autoloader.php';
+$config = require_once('../../config.php');
 
 spl_autoload_register('autoLoad');
 
@@ -34,6 +35,11 @@ include_once('../../includes/navHome.php');
                         $login = new User(0, $_POST['email'], $_POST['password'], "", "false");
                         $login->HashPassword();
                         $login->Login("", "", "");
+
+                        $pdo = new Database($config);
+
+                        $select = new DynamicQuery($pdo);
+                        $select->selectAll('pages');
                     }
                 ?>
         </div>
