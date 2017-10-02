@@ -8,5 +8,6 @@
     <title>Title</title>
     <link rel="stylesheet" href="../../css/bootstrap.min.css"
           integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../css/font-awesome.min.css">
 </head>
 <body>

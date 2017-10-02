@@ -19,5 +19,10 @@
             <a class="nav-link" href="event.php">Events</a>
         </li>  
         </ul>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="login.php"><span class="fa fa-sign-in"></span> Log In</a>
+            </li>
+        </ul>
     </div>
 </nav>
