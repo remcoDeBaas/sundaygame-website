@@ -1,25 +1,19 @@
 <?php
 
-
-
 class Database
 {
     private $pdo;
     private $error;
 
-
     public function __construct()
     {
-            $config = require_once '../config.php';
+        $config = require_once '../../config.php';
 
+        try {
+          $this->setPdo( new PDO(CONNECT .';dbname='. NAME , USER, PASS));
+        } catch (PDOException $e) {
 
-                $this->setPdo( new PDO(
-                    CONNECT .';dbname='. NAME ,
-
-                    USER,
-
-                    PASS
-                ));
+        }
     }
 
     /**

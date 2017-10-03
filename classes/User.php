@@ -1,7 +1,5 @@
 <?php
 
-require_once('../../classes/Alert.php');
-
 class User
 {
     //Properties
@@ -12,9 +10,8 @@ class User
     private $_loggedIn;
 
     //Constructor
-    public function __construct($id, $email, $password, $role, $loggedIn)
+    public function __construct($email, $password, $role, $loggedIn)
     {
-        $this->setId($id);
         $this->setEmail($email);
         $this->setPassword($password);
         $this->setRole($role);
@@ -38,7 +35,7 @@ class User
             $alertSuccess = new Alert('success', 'Success.' , 'Welcome inside the system');
             echo $alertSuccess->createAlert();
         }
-        else 
+        else
         {
             $alertWarning = new Alert('warning', 'Warning', 'Make sure all provided information is correct');
             echo $alertWarning->createAlert();
@@ -57,6 +54,7 @@ class User
 
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT, $options);
         $this->setPassword($hashedPassword);
+        var_dump($this->getPassword());
     }
 
     //Getters en setters

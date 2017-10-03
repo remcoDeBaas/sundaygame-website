@@ -26,7 +26,7 @@ class DynamicQuery
 
             $statement->execute();
 
-            $rows = $statement->fetchAll();
+            $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
 
             return $rows;
         } catch(PDOException $e)
@@ -65,7 +65,7 @@ class DynamicQuery
         }
     }
 
-    public function selectWhere($table, $parameters, $whereDb, $whereValue)
+    public function selectWhere($table, $whereDb, $whereValue)
     {
         $sql = sprintf
         (
@@ -78,14 +78,12 @@ class DynamicQuery
             $whereValue
         );
 
-        print_r($sql);
-
         try {
             $statement = $this->getConnection()->prepare($sql);
 
-            $statement->execute();
+            $result = $statement->execute();
 
-            return $statement->fetchAll(PDO::FETCH_CLASS);
+            return $result->fetchAll(PDO::FETCH_ASSOC);
         } catch(PDOException $e)
         {
             die ($e-getMessage());
@@ -150,7 +148,7 @@ class DynamicQuery
 
             $statement->execute();
 
-            return $statement->fetchAll(PDO::FETCH_CLASS);
+            return $statement->fetchAll(PDO::FETCH_ASSOC);
 
         } catch(PDOException $e)
         {

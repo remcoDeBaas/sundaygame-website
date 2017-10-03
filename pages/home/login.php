@@ -1,7 +1,12 @@
 <?php
 
-$config = require_once '../config.php';
-require_once '../autoloader.php';
+$config = require_once '../../config.php';
+require_once '../../autoloader.php';
+
+//Instanties van de classen
+$connect = new Database();
+
+$query = new DynamicQuery($connect->getPdo());
 
 ?>
 
@@ -22,12 +27,9 @@ require_once '../autoloader.php';
         <?php
             if (isset($_POST['login']))
             {
-                $connect = new Database();
-
-                $query = new DynamicQuery($connect->getPdo());
-
-                $rows = $query->delete('user' , '1');
-
+                $user = new User($_POST['email'], $_POST['password'], "", false);
+                $user->HashPassword();
+                $row = $query->selectWhere('user' , 'userMail' , $_POST['email']);
             }
         ?>
     </form>
