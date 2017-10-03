@@ -22,11 +22,12 @@ require_once '../autoloader.php';
         <?php
             if (isset($_POST['login']))
             {
-                $connection = new Database();
+                $connect = new Database();
 
-                $selectAll = new DynamicQuery($connection);
+                $query = new DynamicQuery($connect->getPdo());
 
-                $selectAll->selectAll('users');
+                $rows = $query->delete('user' , '1');
+
             }
         ?>
     </form>

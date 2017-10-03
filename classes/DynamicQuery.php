@@ -1,9 +1,9 @@
 <?php
 
 
-class DynamicQuery Extends Database
+class DynamicQuery
 {
-    
+
     private $connection;
 
     public function __construct($pdo)
@@ -19,26 +19,23 @@ class DynamicQuery Extends Database
 
             $table
         );
-        
+
         try{
 
             $statement = $this->getConnection()->prepare($sql);
 
-            var_dump($statement);
-
             $statement->execute();
 
-            var_dump($statement);
-
             $rows = $statement->fetchAll();
-            var_dump($rows['userEmail']);
+
+            return $rows;
         } catch(PDOException $e)
         {
             echo $e->getMessage();
         }
     }
 
-    
+
     //This method will insert a query
     public function insert($table, $parameters)
     {
@@ -50,13 +47,17 @@ class DynamicQuery Extends Database
 
             implode(', ', array_keys($parameters)),
 
-            ':' , implode(', :', array_keys($parameters))
+            ':' . implode(', :', array_keys($parameters))
         );
 
         try {
-            $statement = $this->pdo->prepare($sql);
-            
+            var_dump($sql);
+
+            $statement = $this->getConnection()->prepare($sql);
+
             $statement->execute($parameters);
+
+            echo 'goed';
         } catch(PDOException $e) {
             //go to 404
             //for the purpose of testing this will output an exception
@@ -70,8 +71,6 @@ class DynamicQuery Extends Database
         (
             'SELECT * FROM %s WHERE %s = %s',
 
-            implode(', ', array_keys($parameters)),
-
             $table,
 
             $whereDb,
@@ -82,7 +81,7 @@ class DynamicQuery Extends Database
         print_r($sql);
 
         try {
-            $statement = $this->pdo->prepare($sql);
+            $statement = $this->getConnection()->prepare($sql);
 
             $statement->execute();
 
@@ -101,9 +100,9 @@ class DynamicQuery Extends Database
             $table,
 
             implode(array_keys($parameters)),
-            
+
             implode(' = ', array_keys($parameters) , ', '),
-            
+
             $id
         );
 
@@ -127,7 +126,7 @@ class DynamicQuery Extends Database
         );
 
         try {
-            $statement = $this->pdo->prepare($sql);
+            $statement = $this->getConnection()->prepare($sql);
 
             $statement->execute();
         } catch(PDOException $e) {
@@ -148,16 +147,16 @@ class DynamicQuery Extends Database
         try{
 
             $statement = $this->pdo->prepare($sql);
-            
+
             $statement->execute();
-            
+
             return $statement->fetchAll(PDO::FETCH_CLASS);
 
         } catch(PDOException $e)
         {
             die($e->getMessage());
         }
-        
+
     }
 
     /**

@@ -20,8 +20,6 @@ class Database
 
                     PASS
                 ));
-
-                var_dump($this->getPdo());
     }
 
     /**

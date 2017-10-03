@@ -17,11 +17,12 @@ class Alert
 
     //Methods
     public function createAlert()
-    {   
+    {
         //Variabelen krijgen waarde van de get methods
         $alertType = $this->getType();
         $alertTitle = $this->getTitle();
         $alertText = $this->getText();
+
 
         return '<div class="alert alert-'.$alertType.' alert-dismissible fade show" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -34,8 +35,8 @@ class Alert
       </script>';
     }
 
-    
-     
+
+
     //Setter en getters
     public function setType($type)
     {
@@ -64,11 +65,3 @@ class Alert
 }
 
 ?>
-
-<div class="alert alert-warning alert-dismissible fade in" role="alert">
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-  <strong></strong> 
-</div>
-
